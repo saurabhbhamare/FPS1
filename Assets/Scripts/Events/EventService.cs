@@ -4,12 +4,12 @@ public class EventService
 {
     public EventController OnPlayerDeath;
     public EventController OnNewGameButtonClicked;
-    public EventController<Collider> OnTakingDamage;
+    public EventController<Collider> OnPlayerContactWithObject;
 
     public EventService()
     {
         OnNewGameButtonClicked = new EventController();
         OnPlayerDeath = new EventController();
-        OnTakingDamage = new EventController<Collider>();
+        OnPlayerContactWithObject = new EventController<Collider>();
     }
 }

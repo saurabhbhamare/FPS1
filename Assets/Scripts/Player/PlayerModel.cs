@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerModel
 {
     public int playerHealth = 100;
+    public int playerMaxHealth = 100;
     public bool isGrounded;
     public float moveSpeed = 10f;
     public float lookSpeed;

@@ -38,4 +38,9 @@ public class PlayerHUDManager : MonoBehaviour
     {
         playerHealthAmount -= damage;
     }
+    public void ResetHealthValueAndHealtBar()
+    {
+        playerHealthAmount = 100;
+        playerHealthBarImage.fillAmount = 1f;
+    }
 }

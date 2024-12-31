@@ -48,6 +48,7 @@ public class PlayerView : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        playerController.eventService.OnTakingDamage.Invoke(other);
+        // playerController.eventService.OnTakingDamage.Invoke(other);
+        playerController.eventService.OnPlayerContactWithObject.Invoke(other);
     }
 }

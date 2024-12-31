@@ -20,14 +20,24 @@ public class PlayerController
         this.playerBulletPool = playerBulletPool;
         this.uiService = uiService;
         this.eventService = eventService;
-        eventService.OnTakingDamage.AddListener(OnTakingDamage);
-        eventService.OnPlayerDeath.AddListener(OnPlayerDeath);
+        RegisterEventListeners();
+      
     }
     public void HandleMovement()
     {
         characterController.Move(playerModel.movement * playerModel.moveSpeed * Time.deltaTime);
         playerModel.velocity.y += playerModel.gravityVal * Time.deltaTime;
         characterController.Move(playerModel.velocity * Time.deltaTime);
+    }
+    public void RegisterEventListeners()
+    {
+        eventService.OnPlayerContactWithObject.AddListener(OnPlayerContact);
+        eventService.OnPlayerDeath.AddListener(OnPlayerDeath);
+    }
+    public void UnRegisterEventListeners()
+    {
+        eventService.OnPlayerContactWithObject.RemoveListener(OnPlayerContact);
+        eventService.OnPlayerDeath.RemoveListener(OnPlayerDeath);
     }
     public void HandleInput()
     {
@@ -49,7 +59,6 @@ public class PlayerController
             {
                 Fire();
             }
-
         }
     }
     public void Fire()
@@ -69,10 +78,11 @@ public class PlayerController
     {
         playerModel.playerHealth -= damage;
     }
-    public void OnTakingDamage(Collider collider)
+    public void OnPlayerContact(Collider collider)
     {
         if (collider.gameObject.GetComponent<EnemyBulletView>())
         {
+            AudioManager.Instance.PlayPlayerHurtSound();
             int damage = collider.gameObject.GetComponent<EnemyBulletView>().GetEnemyBulletController().bulletDamage;
             TakeDamage(damage);
             if (playerModel.playerHealth <= 0)
@@ -80,9 +90,11 @@ public class PlayerController
                 eventService.OnPlayerDeath.Invoke();
             }
             playerHUDManager.UpdateHealthBarAfterTakingDamage(damage);
+
         }
         if (collider.gameObject.GetComponent<Larvae>())
         {
+            AudioManager.Instance.PlayPlayerHurtSound();
             int damage = collider.gameObject.GetComponent<Larvae>().GetAttackStrength();
             TakeDamage(damage);
             if (playerModel.playerHealth <= 0)
@@ -91,10 +103,19 @@ public class PlayerController
             }
             playerHUDManager.UpdateHealthBarAfterTakingDamage(damage);
         }
+        if(collider.gameObject.GetComponent<HealthKit>())
+        {
+            playerModel.playerHealth = playerModel.playerMaxHealth;
+            playerHUDManager.ResetHealthValueAndHealtBar();
+        }
     }
     private void OnPlayerDeath()
     {
         characterController.enabled = false;
         playerView.enabled = false;
+    }
+    ~PlayerController()
+    {
+        UnRegisterEventListeners();
     }
 }

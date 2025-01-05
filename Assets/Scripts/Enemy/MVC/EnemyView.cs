@@ -25,7 +25,6 @@ public class EnemyView : MonoBehaviour
         {
             if (this.enemyController == null)
             {
-                Debug.Log("Enemy controller is null");
                 return;
             }
             StartCoroutine(HandleShooting());
@@ -34,14 +33,6 @@ public class EnemyView : MonoBehaviour
     void Update()
     {
         enemyController.Movement();
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.GetComponent<PlayerView>())
-        {
-            Debug.Log("Collision happened with player");
-            Time.timeScale = 0.5f;
-        }
     }
     private void OnTriggerEnter(Collider other)
     {

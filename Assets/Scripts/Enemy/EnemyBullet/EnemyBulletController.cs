@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyBulletController
 {
     private EnemyBulletView enemyBulletView;
-    public Screecher screecher;
+    public EnemyController enemyController;
     private float bulletSpeed = 80f;
     public int bulletDamage = 10;
-    public EnemyBulletController(EnemyBulletView enemyBulletView, Screecher screecher)
+    public EnemyBulletController(EnemyBulletView enemyBulletView, EnemyController enemyController)
     {
-        this.screecher = screecher;
+        this.enemyController = enemyController;
         if (enemyBulletView == null)
         {
             Debug.Log("Enemy bullet view is null");
@@ -30,6 +30,10 @@ public class EnemyBulletController
     public void HandleCollision()
     {
         enemyBulletView.gameObject.SetActive(false);
-        screecher.ReturnBulletToPool(this);
+        enemyController.ReturnBulletToPool(this);
+    }
+    public int GetBulletDamage()
+    {
+        return bulletDamage;
     }
 }

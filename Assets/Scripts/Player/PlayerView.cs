@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
+    [SerializeField] private Transform groundCheck;
     public PlayerController playerController;
     private Rigidbody rb;
-    [SerializeField] private Transform groundCheck;
     public LayerMask groundMask;
     public Transform firePoint;
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
@@ -48,7 +48,7 @@ public class PlayerView : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        // playerController.eventService.OnTakingDamage.Invoke(other);
         playerController.eventService.OnPlayerContactWithObject.Invoke(other);
     }
+
 }

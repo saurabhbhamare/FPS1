@@ -7,21 +7,25 @@ using TMPro;
 
 public class MainHandler : MonoBehaviour
 {
+    
     [SerializeField] private PlayerView playerView;
-    [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerBulletView playerBulletView;
+    [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerHUDManager playerHUDManager;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private List<EnemySO> levelEnemiesSO;
+
     [SerializeField] private Button homeButton;
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private UIService uiService;
 
     private PlayerController playerController;
-    [SerializeField] private UIService uiService;
     private PlayerService playerService;
+    private EnemyService enemyService;
     private EventService eventService;
 
     void Start()
     {
-
         InitServices();
         RegisterEventListener();
         RegisterButtonListener();
@@ -34,6 +38,7 @@ public class MainHandler : MonoBehaviour
     {
         eventService = new EventService();
         playerService = new PlayerService(playerView, characterController, playerBulletView, uiService, playerHUDManager, eventService);
+        enemyService = new EnemyService(levelEnemiesSO, playerTransform);
     }
     private void ShowGameOverScreen()
     {
@@ -50,7 +55,6 @@ public class MainHandler : MonoBehaviour
     }
     public void RegisterButtonListener()
     {
-
         homeButton.onClick.AddListener(OnHomeButtonClicked);
     }
     public void OnHomeButtonClicked()

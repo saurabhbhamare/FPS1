@@ -8,7 +8,6 @@ public class PlayerModel
     public int playerMaxHealth = 100;
     public bool isGrounded;
     public float moveSpeed = 10f;
-    public float lookSpeed;
     public float jumpForce = 5f;
     public float gravityVal = -9.81f;
     public Vector3 movement;

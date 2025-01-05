@@ -10,7 +10,7 @@ public class EnemyBulletView : MonoBehaviour
         this.enemyBulletController = enemyBulletController;
     }
     private void OnCollisionEnter(Collision collision)
-    { 
+    {
         enemyBulletController.HandleCollision();
     }
     private void OnTriggerEnter(Collider other)

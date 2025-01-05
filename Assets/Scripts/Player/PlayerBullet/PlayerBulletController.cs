@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBulletController
 {
     private PlayerBulletView playerBulletView;
+    public int bulletDamage = 10;
     private float bulletSpeed = 250f;
     private PlayerService playerService;
     public PlayerBulletController(PlayerBulletView playerBulletView)

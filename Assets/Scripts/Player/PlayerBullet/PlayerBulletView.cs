@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerBulletView : MonoBehaviour
 {
-    private PlayerBulletController playerBulletController;
+    public PlayerBulletController playerBulletController;
+    
     public void SetBulletController(PlayerBulletController playerBulletController)
     {
         this.playerBulletController = playerBulletController;

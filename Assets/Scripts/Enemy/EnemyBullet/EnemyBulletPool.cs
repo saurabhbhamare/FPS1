@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBulletPool: GenericResourcePool<EnemyBulletController>
+public class EnemyBulletPool : GenericResourcePool<EnemyBulletController>
 {
     private EnemyBulletView enemyBulletView;
-    private Screecher screecher;
-    public EnemyBulletPool(EnemyBulletView enemyBulletView,Screecher screecher)
+    private EnemyController enemyController;
+    public EnemyBulletPool(EnemyBulletView enemyBulletView, EnemyController enemyController)
     {
-        this.screecher = screecher;
+        this.enemyController = enemyController;
         this.enemyBulletView = enemyBulletView;
     }
     public EnemyBulletController GetEnemyBullet() => GetItem<EnemyBulletController>();
     protected override EnemyBulletController CreateItem<T>()
     {
-        EnemyBulletController enemyBullet = new EnemyBulletController(enemyBulletView,screecher);
+        EnemyBulletController enemyBullet = new EnemyBulletController(enemyBulletView, enemyController);
         return enemyBullet;
     }
 }

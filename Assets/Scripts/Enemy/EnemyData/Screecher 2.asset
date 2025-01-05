@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9ade2effffff84792c715e6fab9e41, type: 3}
+  m_Name: Screecher 2
+  m_EditorClassIdentifier: 
+  EnemyPrefab: {fileID: -5142591494638678077, guid: ee608e9a5f34fb849a8fc95ac870104c,
+    type: 3}
+  EnemyType: 0
+  SpawnPosition: {x: 455, y: 13.6, z: 635.5}
+  SpawnRotation: {x: 0, y: 0, z: 0}
+  MovementSpeed: 0
+  MaxHealth: 150
+  enemyBulletView: {fileID: 5919529648297277494, guid: e43127769bc76454ea6e1d88ef1bb561,
+    type: 3}
+  attackStrength: 0

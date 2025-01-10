@@ -49,10 +49,6 @@ public class MainHandler : MonoBehaviour
     {
         eventService.OnPlayerDeath.RemoveListener(ShowGameOverScreen);
     }
-    ~MainHandler()
-    {
-        UnRegisterEventListeners();
-    }
     public void RegisterButtonListener()
     {
         homeButton.onClick.AddListener(OnHomeButtonClicked);
@@ -60,5 +56,9 @@ public class MainHandler : MonoBehaviour
     public void OnHomeButtonClicked()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+    private void OnDestroy()
+    {
+        UnRegisterEventListeners();
     }
 }

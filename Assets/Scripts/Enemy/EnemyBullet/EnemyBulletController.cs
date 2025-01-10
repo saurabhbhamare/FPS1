@@ -5,9 +5,11 @@ using UnityEngine;
 public class EnemyBulletController
 {
     private EnemyBulletView enemyBulletView;
+    private EnemyBulletModel enemyBulletModel;
     public EnemyController enemyController;
-    private float bulletSpeed = 80f;
-    public int bulletDamage = 10;
+
+    //private float bulletSpeed = 80f;
+    //public int bulletDamage = 10;
     public EnemyBulletController(EnemyBulletView enemyBulletView, EnemyController enemyController)
     {
         this.enemyController = enemyController;
@@ -15,6 +17,7 @@ public class EnemyBulletController
         {
             Debug.Log("Enemy bullet view is null");
         }
+        this.enemyBulletModel = new EnemyBulletModel();
         this.enemyBulletView = Object.Instantiate(enemyBulletView);
         this.enemyBulletView.SetBulletController(this);
     }
@@ -25,7 +28,7 @@ public class EnemyBulletController
         Vector3 direction = (playerPosition.position - firePoint.position).normalized;
         enemyBulletView.transform.rotation = Quaternion.LookRotation(direction);
         Rigidbody rb = enemyBulletView.GetComponent<Rigidbody>();
-        rb.velocity = direction * bulletSpeed;
+        rb.velocity = direction * this.enemyBulletModel.bulletSpeed;
     }
     public void HandleCollision()
     {
@@ -34,6 +37,6 @@ public class EnemyBulletController
     }
     public int GetBulletDamage()
     {
-        return bulletDamage;
+        return this.enemyBulletModel.bulletDamage;
     }
 }

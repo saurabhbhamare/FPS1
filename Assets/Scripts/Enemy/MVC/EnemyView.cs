@@ -8,7 +8,6 @@ public class EnemyView : MonoBehaviour
 {
     [SerializeField] private Image healthBarImage;
     [SerializeField] private Transform firePointTransform;
-
     public EnemyController enemyController { get; private set; }
     public NavMeshAgent navmeshAgent;
     private void Awake()
@@ -27,12 +26,13 @@ public class EnemyView : MonoBehaviour
             {
                 return;
             }
-            StartCoroutine(HandleShooting());
+            enemyController.GetEnemeyModel().nextAttackTime = Time.time + enemyController.GetEnemeyModel().attackInterval;
         }
     }
     void Update()
     {
         enemyController.Movement();
+        HandleShooting();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -46,12 +46,12 @@ public class EnemyView : MonoBehaviour
     {
         return firePointTransform;
     }
-    public IEnumerator HandleShooting()
+    public void HandleShooting()
     {
-        while (true)
+        if(Time.time >= enemyController.GetEnemeyModel().nextAttackTime)
         {
             this.enemyController.Attack();
-            yield return new WaitForSeconds(3f);
+            enemyController.GetEnemeyModel().nextAttackTime = Time.time + enemyController.GetEnemeyModel().attackInterval;
         }
     }
 }

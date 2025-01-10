@@ -50,5 +50,9 @@ public class PlayerView : MonoBehaviour
     {
         playerController.eventService.OnPlayerContactWithObject.Invoke(other);
     }
+    private void OnDestroy()
+    {
+        playerController.UnRegisterEventListeners();
+    }
 
 }

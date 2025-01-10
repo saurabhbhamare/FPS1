@@ -110,13 +110,10 @@ public class PlayerController
         eventService.OnPlayerContactWithObject.AddListener(OnPlayerContact);
         eventService.OnPlayerDeath.AddListener(OnPlayerDeath);
     }
-    private void UnRegisterEventListeners()
+    public void UnRegisterEventListeners()
     {
         eventService.OnPlayerContactWithObject.RemoveListener(OnPlayerContact);
         eventService.OnPlayerDeath.RemoveListener(OnPlayerDeath);
     }
-    ~PlayerController()
-    {
-        UnRegisterEventListeners();
-    }
+    
 }

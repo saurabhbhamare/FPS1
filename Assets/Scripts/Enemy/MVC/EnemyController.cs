@@ -7,31 +7,33 @@ public class EnemyController
     protected EnemySO enemySO;
     protected EnemyView enemyView;
     public Transform targetTransform;
-    public int enemyHealth;
-    public int attackStrength;
+    private EnemyModel enemyModel;
     public EnemyController(EnemySO enemySO, Transform playerTransform)
     {
         this.enemySO = enemySO;
         this.targetTransform = playerTransform;
-        this.enemyHealth = enemySO.MaxHealth;
-        this.attackStrength = enemySO.attackStrength;
+        this.enemyModel = new EnemyModel(enemySO);
         InitializeView();
     }
     private void InitializeView()
     {
         enemyView = Object.Instantiate(enemySO.EnemyPrefab);
     }
+    public EnemyModel GetEnemeyModel()
+    {
+        return this.enemyModel;
+    }
     public int GetAttackStrength()
     {
-        return attackStrength;
+        return this.enemyModel.attackStrength;
     }
     protected void TakeDamage(int damage)
     {
-        this.enemyHealth -= damage;
+        this.enemyModel.enemyHealth -= damage;
     }
     protected void UpdateHealthBarUI()
     {
-        this.enemyView.GetHealthBarUIImage().fillAmount = (float)enemyHealth / 100;
+        this.enemyView.GetHealthBarUIImage().fillAmount = (float)this.enemyModel.enemyHealth / 100;
     }
     public void HandleCollision(Collider collider)
     {
@@ -45,7 +47,7 @@ public class EnemyController
     }
     protected void CheckIfDead()
     {
-        if (this.enemyHealth <= 0)
+        if(enemyModel.enemyHealth<=0)
         {
             EnemyDied();
         }
@@ -54,7 +56,6 @@ public class EnemyController
     {
         GameObject.Destroy(enemyView.gameObject);
     }
-
     public virtual void Movement() { }
     public virtual void Attack() { }
     public virtual void ReturnBulletToPool(EnemyBulletController bulletToReturn) { }

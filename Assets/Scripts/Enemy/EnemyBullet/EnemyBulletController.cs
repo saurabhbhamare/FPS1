@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBulletController
@@ -7,9 +5,6 @@ public class EnemyBulletController
     private EnemyBulletView enemyBulletView;
     private EnemyBulletModel enemyBulletModel;
     public EnemyController enemyController;
-
-    //private float bulletSpeed = 80f;
-    //public int bulletDamage = 10;
     public EnemyBulletController(EnemyBulletView enemyBulletView, EnemyController enemyController)
     {
         this.enemyController = enemyController;

@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBulletController
 {
     private PlayerBulletView playerBulletView;
-    public int bulletDamage = 10;
-    private float bulletSpeed = 250f;
     private PlayerService playerService;
     private PlayerBulletModel playerBulletModel;
     public PlayerBulletController(PlayerBulletView playerBulletView)
@@ -27,5 +23,9 @@ public class PlayerBulletController
     {
         playerBulletView.gameObject.SetActive(false);
         playerService.ReturnBulletToPool(this);
+    }
+    public PlayerBulletModel GetPlayerBulletModel()
+    {
+        return playerBulletModel;
     }
 }

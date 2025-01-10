@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBulletView : MonoBehaviour
 {
-    public PlayerBulletController playerBulletController;
-    
+    public PlayerBulletController playerBulletController;   
     public void SetBulletController(PlayerBulletController playerBulletController)
     {
         this.playerBulletController = playerBulletController;
@@ -14,4 +11,5 @@ public class PlayerBulletView : MonoBehaviour
     {
         playerBulletController.HandleCollision();
     }
+    
 }

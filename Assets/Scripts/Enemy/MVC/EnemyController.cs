@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 public class EnemyController
 {
     protected EnemySO enemySO;
@@ -39,7 +36,7 @@ public class EnemyController
     {
         if (collider.GetComponent<PlayerBulletView>())
         {
-            int damage = collider.GetComponent<PlayerBulletView>().playerBulletController.bulletDamage;
+            int damage = collider.GetComponent<PlayerBulletView>().playerBulletController.GetPlayerBulletModel().bulletDamage;
             TakeDamage(damage);
             UpdateHealthBarUI();
             CheckIfDead();

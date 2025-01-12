@@ -36,6 +36,7 @@ public class EnemyView : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("collision for enemy happened");
         this.enemyController.HandleCollision(other);
     }
     public Image GetHealthBarUIImage()

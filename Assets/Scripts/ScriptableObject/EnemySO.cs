@@ -9,6 +9,6 @@ public class EnemySO : ScriptableObject
     public Vector3 SpawnRotation;
     public float MovementSpeed;
     public int MaxHealth;
-    public EnemyBulletView enemyBulletView;
+    //public EnemyBulletView enemyBulletView;
     public int attackStrength;
 }

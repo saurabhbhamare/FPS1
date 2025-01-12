@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class EnemyService
 {
+    private BulletService bulletService;
     private Transform playerTransform;
+    
     private List<EnemySO> enemySOList;
 
     private List<EnemyController> levelEnemies;
-    public EnemyService(List<EnemySO> enemySOList, Transform playerTransform)
+    public EnemyService(List<EnemySO> enemySOList, Transform playerTransform,BulletService bulletService)
     {
         this.enemySOList = enemySOList;
         this.playerTransform = playerTransform;
+        this.bulletService = bulletService;
         InitializeEnemies();
         SpawnEnemies();
     }
@@ -37,7 +40,7 @@ public class EnemyService
                 enemy = new LarvaeController(enemySO, playerTransform);
                 break;
             case EnemyType.SCREECHER:
-                enemy = new ScreecherController(enemySO, playerTransform);
+                enemy = new ScreecherController(enemySO, playerTransform,bulletService);
                 break;
             default:
                 enemy = new EnemyController(enemySO, playerTransform);

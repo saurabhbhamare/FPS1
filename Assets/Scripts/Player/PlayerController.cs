@@ -5,19 +5,24 @@ public class PlayerController
     public PlayerView playerView;
     public PlayerModel playerModel;
     private CharacterController characterController;
-    private PlayerBulletPool playerBulletPool;
+
+    // private BulletPool playerBulletPool;
+    //private PlayerBulletPool playerBulletPool;
     private PlayerService playerService;
     public UIService uiService;
     public PlayerHUDManager playerHUDManager;
     public EventService eventService;
-    public PlayerController(PlayerView playerView, CharacterController characterController, PlayerBulletPool playerBulletPool, PlayerService playerService, UIService uiService, PlayerHUDManager playerHUDManager, EventService eventService)
+    private BulletService bulletService;
+    public PlayerController(PlayerView playerView, CharacterController characterController,PlayerService playerService, UIService uiService, PlayerHUDManager playerHUDManager, EventService eventService,BulletService bulletService)
     {
+        this.bulletService = bulletService;
+        //playerBulletPool = new BulletPool();
         this.playerHUDManager = playerHUDManager;
         this.playerService = playerService;
         this.playerModel = new PlayerModel();
         this.playerView = playerView;
         this.characterController = characterController;
-        this.playerBulletPool = playerBulletPool;
+        //this.playerBulletPool = playerBulletPool;
         this.uiService = uiService;
         this.eventService = eventService;
         RegisterEventListeners();
@@ -55,9 +60,14 @@ public class PlayerController
     private void Fire()
     {
         AudioManager.Instance.PlayFireSound();
-        PlayerBulletController playerBullet = playerBulletPool.GetPlayerBullet();
+        //PlayerBulletController playerBullet = playerBulletPool.GetPlayerBullet();
 
-        playerBullet.ConfigureBullet(playerView.firePoint, playerService);
+        //playerBullet.ConfigureBullet(playerView.firePoint, playerService);
+        if(bulletService==null)
+        {
+            Debug.Log("bulletservice is null");
+        }
+        bulletService.FireBullet(playerView.firePoint.position, playerView.firePoint.rotation);
         playerModel.ammoStock--;
         if (playerModel.ammoStock < 1)
         {
@@ -69,37 +79,37 @@ public class PlayerController
     {
         playerModel.playerHealth -= damage;
     }
-    private void OnPlayerContact(Collider collider)
-    {
-        if (collider.gameObject.GetComponent<EnemyBulletView>())
-        {
-            AudioManager.Instance.PlayPlayerHurtSound();
-            int damage = collider.gameObject.GetComponent<EnemyBulletView>().GetEnemyBulletController().GetBulletDamage();
-            TakeDamage(damage);
-            if (playerModel.playerHealth <= 0)
-            {
-                eventService.OnPlayerDeath.Invoke();
-            }
-            playerHUDManager.UpdateHealthBarAfterTakingDamage(damage);
+    //private void OnPlayerContact(Collider collider)
+    //{
+    //    if (collider.gameObject.GetComponent<EnemyBulletView>())
+    //    {
+    //        AudioManager.Instance.PlayPlayerHurtSound();
+    //        int damage = collider.gameObject.GetComponent<EnemyBulletView>().GetEnemyBulletController().GetBulletDamage();
+    //        TakeDamage(damage);
+    //        if (playerModel.playerHealth <= 0)
+    //        {
+    //            eventService.OnPlayerDeath.Invoke();
+    //        }
+    //        playerHUDManager.UpdateHealthBarAfterTakingDamage(damage);
 
-        }
-        if (collider.gameObject.GetComponent<EnemyView>())
-        {
-            AudioManager.Instance.PlayPlayerHurtSound();
-            int damage = collider.gameObject.GetComponent<EnemyView>().enemyController.GetAttackStrength();
-            TakeDamage(damage);
-            if (playerModel.playerHealth <= 0)
-            {
-                eventService.OnPlayerDeath.Invoke();
-            }
-            playerHUDManager.UpdateHealthBarAfterTakingDamage(damage);
-        }
-        if (collider.gameObject.GetComponent<HealthKit>())
-        {
-            playerModel.playerHealth = playerModel.playerMaxHealth;
-            playerHUDManager.ResetHealthValueAndHealtBar();
-        }
-    }
+    //    }
+    //    if (collider.gameObject.GetComponent<EnemyView>())
+    //    {
+    //        AudioManager.Instance.PlayPlayerHurtSound();
+    //        int damage = collider.gameObject.GetComponent<EnemyView>().enemyController.GetAttackStrength();
+    //        TakeDamage(damage);
+    //        if (playerModel.playerHealth <= 0)
+    //        {
+    //            eventService.OnPlayerDeath.Invoke();
+    //        }
+    //        playerHUDManager.UpdateHealthBarAfterTakingDamage(damage);
+    //    }
+    //    if (collider.gameObject.GetComponent<HealthKit>())
+    //    {
+    //        playerModel.playerHealth = playerModel.playerMaxHealth;
+    //        playerHUDManager.ResetHealthValueAndHealtBar();
+    //    }
+    //}
     private void OnPlayerDeath()
     {
         characterController.enabled = false;
@@ -107,12 +117,12 @@ public class PlayerController
     }
     public void RegisterEventListeners()
     {
-        eventService.OnPlayerContactWithObject.AddListener(OnPlayerContact);
+        //eventService.OnPlayerContactWithObject.AddListener(OnPlayerContact);
         eventService.OnPlayerDeath.AddListener(OnPlayerDeath);
     }
     public void UnRegisterEventListeners()
     {
-        eventService.OnPlayerContactWithObject.RemoveListener(OnPlayerContact);
+        //eventService.OnPlayerContactWithObject.RemoveListener(OnPlayerContact);
         eventService.OnPlayerDeath.RemoveListener(OnPlayerDeath);
     }
     

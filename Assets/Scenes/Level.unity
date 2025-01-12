@@ -706,12 +706,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120a4cca5118ca94c9df3ba35f51a317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1647266459}
-  healthBarImage: {fileID: 2039373863}
-  enemyHealth: 0
-  currentHealth: 0
-  speed: 0
-  hoverHeight: 10
 --- !u!4 &227655694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4292625075940306277, guid: 4186f78c80afc8f44b6f401d9821b731,
@@ -1495,12 +1489,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 408983809}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &408983811 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1374090229019441459, guid: 439a8a9d721048a46bec9d47581b4c1d,
-    type: 3}
-  m_PrefabInstance: {fileID: 408983809}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &408983812 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4699839180939646045, guid: 439a8a9d721048a46bec9d47581b4c1d,
@@ -1542,17 +1530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a941044f143967f47a6afac293a5bd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1647266459}
-  healthBarImage: {fileID: 1671197740}
-  enemyHealth: 0
-  currentHealth: 0
-  speed: 0
-  enemyBulletView: {fileID: 5919529648297277494, guid: e43127769bc76454ea6e1d88ef1bb561,
-    type: 3}
-  firePoint: {fileID: 408983811}
-  zigzagAmplitude: 500
-  zigzagFrequency: 0.4
-  hoverHeight: 10
 --- !u!1 &426009105
 GameObject:
   m_ObjectHideFlags: 0
@@ -2703,12 +2680,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!4 &641413683 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1374090229019441459, guid: 439a8a9d721048a46bec9d47581b4c1d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1573155264}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &683475189
 GameObject:
   m_ObjectHideFlags: 0
@@ -6844,17 +6815,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a941044f143967f47a6afac293a5bd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1647266459}
-  healthBarImage: {fileID: 1527922729}
-  enemyHealth: 0
-  currentHealth: 0
-  speed: 0
-  enemyBulletView: {fileID: 5919529648297277494, guid: e43127769bc76454ea6e1d88ef1bb561,
-    type: 3}
-  firePoint: {fileID: 641413683}
-  zigzagAmplitude: 500
-  zigzagFrequency: 3
-  hoverHeight: 10
 --- !u!136 &1573155268
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8751,8 +8711,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerView: {fileID: 607107982}
   characterController: {fileID: 607107980}
-  playerBulletView: {fileID: 3130504613303889336, guid: 51170637ebdb20e4baa205adf1535ae0,
-    type: 3}
+  playerHUDManager: {fileID: 1557486157}
+  playerTransform: {fileID: 1647266459}
   levelEnemiesSO:
   - {fileID: 11400000, guid: 56319366c372c0e4898ec7c6a35cba87, type: 2}
   - {fileID: 11400000, guid: 64d96e5b5fea2d74799843747d6b57a4, type: 2}
@@ -8760,11 +8720,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a890534ffac3b244fa41debf3c18b503, type: 2}
   - {fileID: 11400000, guid: 6789dcc800b68b243b59ecc4c9cfaf18, type: 2}
   - {fileID: 11400000, guid: fce8aaa05c5d5a44285f4f4fd61e9efe, type: 2}
-  playerHUDManager: {fileID: 1557486157}
   homeButton: {fileID: 1306066833}
   gameOverScreen: {fileID: 1489016162}
-  playerTransform: {fileID: 1647266459}
   uiService: {fileID: 0}
+  playerBulletPrefab: {fileID: 8737596289814601222, guid: 51170637ebdb20e4baa205adf1535ae0,
+    type: 3}
 --- !u!4 &2095746754
 Transform:
   m_ObjectHideFlags: 0
@@ -8906,12 +8866,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2097406027}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2097406029 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1374090229019441459, guid: 439a8a9d721048a46bec9d47581b4c1d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2097406027}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2097406030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4699839180939646045, guid: 439a8a9d721048a46bec9d47581b4c1d,
@@ -8953,17 +8907,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a941044f143967f47a6afac293a5bd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1647266459}
-  healthBarImage: {fileID: 804168552}
-  enemyHealth: 0
-  currentHealth: 0
-  speed: 0
-  enemyBulletView: {fileID: 5919529648297277494, guid: e43127769bc76454ea6e1d88ef1bb561,
-    type: 3}
-  firePoint: {fileID: 2097406029}
-  zigzagAmplitude: 500
-  zigzagFrequency: 1
-  hoverHeight: 10
 --- !u!1001 &2133866936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9095,12 +9038,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2133866936}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2133866938 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1374090229019441459, guid: 439a8a9d721048a46bec9d47581b4c1d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2133866936}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2133866939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4699839180939646045, guid: 439a8a9d721048a46bec9d47581b4c1d,
@@ -9142,17 +9079,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a941044f143967f47a6afac293a5bd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1647266459}
-  healthBarImage: {fileID: 1228266142}
-  enemyHealth: 0
-  currentHealth: 0
-  speed: 0
-  enemyBulletView: {fileID: 5919529648297277494, guid: e43127769bc76454ea6e1d88ef1bb561,
-    type: 3}
-  firePoint: {fileID: 2133866938}
-  zigzagAmplitude: 500
-  zigzagFrequency: 0.2
-  hoverHeight: 10
 --- !u!1 &2141809141
 GameObject:
   m_ObjectHideFlags: 0

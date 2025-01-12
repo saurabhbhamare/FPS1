@@ -1,22 +1,19 @@
 using UnityEngine;
 public class ScreecherController : EnemyController
 {
+    private BulletService bulletService;
     private float zigzagAmplitude = 500f;
     private float zigzagFrequency = 1f;
     private float hoverHeight = 10.0f;
     private Transform playerTransform;
-    private EnemyBulletPool enemyBulletPool;
-    private EnemyBulletView enemyBulletView;
     private Transform fireTransform;
-    public ScreecherController(EnemySO enemySO, Transform playerTransform) : base(enemySO, playerTransform)
+    public ScreecherController(EnemySO enemySO, Transform playerTransform,BulletService bulletService) : base(enemySO, playerTransform)
     {
+        this.bulletService = bulletService;
         this.enemyView.SetEnemyController(this);
         enemyView.gameObject.transform.position = enemySO.SpawnPosition;
         enemyView.transform.rotation = Quaternion.Euler(enemySO.SpawnRotation);
         this.playerTransform = playerTransform;
-        this.enemyBulletView = enemySO.enemyBulletView;
-        fireTransform = this.enemyView.GetFirePointTransform();
-        enemyBulletPool = new EnemyBulletPool(this.enemyBulletView, this);
     }
     public override void Movement()
     {
@@ -37,10 +34,4 @@ public class ScreecherController : EnemyController
         lookRotation *= adjustment;
         this.enemyView.transform.rotation = Quaternion.Slerp(this.enemyView.transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
-    public override void Attack()
-    {
-        EnemyBulletController enemyBullet = enemyBulletPool.GetEnemyBullet();
-        enemyBullet.ConfigureBullet(fireTransform, playerTransform);
-    }
-    public override void ReturnBulletToPool(EnemyBulletController bulletToReturn) => enemyBulletPool.ReturnItem(bulletToReturn);
 }

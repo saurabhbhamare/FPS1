@@ -7,22 +7,19 @@ public class PlayerService
     private CharacterController characterController;
     private PlayerController playerController;
     private PlayerView playerView;
-    private PlayerBulletPool playerBulletPool;
-    private PlayerBulletView playerBulletView;
     private UIService uiService;
     private PlayerHUDManager playerHUDManager;
     private EventService eventService;
-    public PlayerService(PlayerView playerView, CharacterController characterController, PlayerBulletView playerBulletView, UIService uiService, PlayerHUDManager playerHUDManager, EventService eventService)
+    private BulletService bulletService;
+    public PlayerService(PlayerView playerView, CharacterController characterController,UIService uiService, PlayerHUDManager playerHUDManager, EventService eventService,BulletService bulletService)
     {
+        this.bulletService = bulletService;
         this.playerHUDManager = playerHUDManager;
         this.uiService = uiService;
         this.playerView = playerView;
-        this.playerBulletView = playerBulletView;
         this.eventService = eventService;
         this.characterController = characterController;
-        playerBulletPool = new PlayerBulletPool(playerBulletView);
-        playerController = new PlayerController(playerView, characterController, playerBulletPool, this, uiService, playerHUDManager, this.eventService);
+        playerController = new PlayerController(playerView, characterController,this, uiService, playerHUDManager, this.eventService,bulletService);
         playerView.SetPlayerController(playerController);
     }
-    public void ReturnBulletToPool(PlayerBulletController bulletToReturn) => playerBulletPool.ReturnItem(bulletToReturn);
 }

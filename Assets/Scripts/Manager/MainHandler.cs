@@ -6,7 +6,7 @@ public class MainHandler : MonoBehaviour
 {
     
     [SerializeField] private PlayerView playerView;
-    [SerializeField] private PlayerBulletView playerBulletView;
+   // [SerializeField] private PlayerBulletView playerBulletView;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerHUDManager playerHUDManager;
     [SerializeField] private Transform playerTransform;
@@ -15,12 +15,13 @@ public class MainHandler : MonoBehaviour
     [SerializeField] private Button homeButton;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private UIService uiService;
+    [SerializeField] private GameObject playerBulletPrefab;
 
     private PlayerController playerController;
     private PlayerService playerService;
     private EnemyService enemyService;
     private EventService eventService;
-
+    private BulletService bulletService;
     void Start()
     {
         InitServices();
@@ -33,9 +34,11 @@ public class MainHandler : MonoBehaviour
     }
     private void InitServices()
     {
+        bulletService = new BulletService(playerBulletPrefab);
         eventService = new EventService();
-        playerService = new PlayerService(playerView, characterController, playerBulletView, uiService, playerHUDManager, eventService);
-        enemyService = new EnemyService(levelEnemiesSO, playerTransform);
+        playerService = new PlayerService(playerView, characterController, uiService, playerHUDManager, eventService,bulletService);
+        enemyService = new EnemyService(levelEnemiesSO, playerTransform,bulletService);
+      
     }
     private void ShowGameOverScreen()
     {

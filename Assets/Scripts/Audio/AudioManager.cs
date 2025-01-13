@@ -1,12 +1,15 @@
 using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
+    [Header("Audio Source")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
+
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip fireBullet;
+    [SerializeField] private AudioClip backgroundMusic;
+    [SerializeField] private AudioClip playerHurt;
     public static AudioManager Instance { get; private set; }
-    public AudioClip fireBullet;
-    public AudioClip backgroundMusic;
-    public AudioClip playerHurt;
     private void Awake()
     {
         if (Instance == null)

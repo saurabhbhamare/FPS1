@@ -5,9 +5,9 @@ using UnityEngine;
 public class MouseMovement : MonoBehaviour
 {
 
-    public float mouseSensitivity = 50f;
-    public Transform playerBody;
-    float xRotation = 0f;
+    [SerializeField] private Transform playerBody;
+    private float mouseSensitivity = 50f;
+    private float xRotation = 0f;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;

@@ -18,7 +18,6 @@ public class EnemyService
         InitializeEnemies();
         SpawnEnemies();
     }
-
     private void InitializeEnemies()
     {
         levelEnemies = new List<EnemyController>();

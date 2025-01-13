@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private BulletService bulletService;
+    public BulletType bulletType;
     private float bulletSpeed = 100f;
     private int bulletDamage = 10;
-    public BulletType bulletType;
-    private BulletService bulletService;
     public void SetBulletService(BulletService service)
     {
         bulletService = service;
@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour
         //Handle Movement
         transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
     }
-
     private void OnTriggerEnter(Collider other)
     {
         // Handle collision logic

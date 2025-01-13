@@ -16,7 +16,7 @@ public class EnemyController
     {
         enemyView = Object.Instantiate(enemySO.EnemyPrefab);
     }
-    public EnemyModel GetEnemeyModel()
+    public EnemyModel GetEnemyModel()
     {
         return this.enemyModel;
     }
@@ -30,7 +30,7 @@ public class EnemyController
     }
     protected void UpdateHealthBarUI()
     {
-        this.enemyView.GetHealthBarUIImage().fillAmount = (float)this.enemyModel.enemyHealth / 100;
+        this.enemyView.GetHealthBarUIImage().fillAmount = (float)this.enemyModel.enemyHealth / 100f;
     }
     public void HandleCollision(Collider collider)
     {
@@ -44,7 +44,7 @@ public class EnemyController
     }
     protected void CheckIfDead()
     {
-        if(enemyModel.enemyHealth<=0)
+        if(enemyModel.enemyHealth <= 0)
         {
             EnemyDied();
         }

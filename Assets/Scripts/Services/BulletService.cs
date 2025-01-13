@@ -3,26 +3,34 @@ using UnityEngine;
 
 public class BulletService
 {
+    private PoolSO poolData;
     private Transform playerTransform;
-    [SerializeField] private GameObject playerBulletPrefab;
-    [SerializeField] private GameObject enemyBulletPrefab;
-    private int playerPoolSize = 10;
-    private int enemyPoolSize = 30;
+    private GameObject playerBulletPrefab;
+    private GameObject enemyBulletPrefab;
+    private int playerBulletPoolSize;
+    private int enemyBulletPoolSize;
 
     private Queue<Bullet> playerBulletPool = new Queue<Bullet>();
     private Queue<Bullet> enemyBulletPool = new Queue<Bullet>();
 
-    public BulletService(GameObject playerBulletPrefab, GameObject enemyBulletPrefab, Transform playerTransform)
+    public BulletService(PoolSO poolData, Transform playerTransform)
     {
-        this.playerBulletPrefab = playerBulletPrefab;
-        this.enemyBulletPrefab = enemyBulletPrefab;
+        this.poolData = poolData;
         this.playerTransform = playerTransform;
+        InitializePoolData();
         InitializePoolForPlayerAndEnemy();
+    }
+    private void InitializePoolData()
+    {
+        this.playerBulletPrefab = poolData.PlayerBulletPrefab;
+        this.enemyBulletPrefab = poolData.EnemyBulletPrefab;
+        this.playerBulletPoolSize = poolData.PlayerBulletPoolSize;
+        this.enemyBulletPoolSize = poolData.EnemyBulletPoolSize;
     }
     private void InitializePoolForPlayerAndEnemy()
     {
-        InitializePool(playerBulletPrefab, playerBulletPool, playerPoolSize);
-        InitializePool(enemyBulletPrefab, enemyBulletPool, enemyPoolSize);
+        InitializePool(playerBulletPrefab, playerBulletPool, playerBulletPoolSize);
+        InitializePool(enemyBulletPrefab, enemyBulletPool, enemyBulletPoolSize);
     }
     public void InitializePool(GameObject bulletPrefab, Queue<Bullet> bulletPool, int poolSize)
     {

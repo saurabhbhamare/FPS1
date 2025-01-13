@@ -2,18 +2,38 @@ using UnityEngine;
 
 public class PlayerModel
 {
-    public int playerHealth = 100;
-    public int playerMaxHealth = 100;
-    public bool isGrounded;
-    public float moveSpeed = 10f;
-    public float jumpForce = 5f;
-    public float gravityVal = -9.81f;
+    private PlayerSO playerData;
     public Vector3 movement;
     public Vector3 velocity;
-    public float groundDistance = 0.1f;
-    public int ammoStock = 10;
+
+    public bool isGrounded;
     public bool isReloading;
-    public int maxAmmo = 10;
-    public float reloadDuration = 3f;
-    public float reloadStartTime = 0f;
+    public float reloadStartTime;
+    public int playerHealth;
+    public int playerMaxHealth;
+    public float jumpForce;
+    public float moveSpeed;
+    public float reloadDuration;
+    public int maxAmmo;
+    public float gravityValue;
+    public float groundDistance;
+    public int ammoStock;
+
+    public PlayerModel(PlayerSO playerData)
+    {
+        this.playerData = playerData;
+        playerMaxHealth = playerData.PlayerMaxHealth;
+        moveSpeed = playerData.MoveSpeed;
+        jumpForce = playerData.JumpForce;
+        gravityValue = playerData.GravityValue;
+        maxAmmo = playerData.MaxAmmo;
+        reloadDuration = playerData.ReloadDuration;
+        groundDistance = playerData.GroundDistance;
+        ammoStock = maxAmmo;
+        playerHealth = playerData.PlayerMaxHealth;
+        reloadStartTime = 0f;
+    }
+
+
+
 }

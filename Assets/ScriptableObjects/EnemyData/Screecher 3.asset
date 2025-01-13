@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c9ade2effffff84792c715e6fab9e41, type: 3}
-  m_Name: Screecher 1
+  m_Name: Screecher 3
   m_EditorClassIdentifier: 
+  MovementSpeed: 0
   EnemyPrefab: {fileID: -5142591494638678077, guid: ee608e9a5f34fb849a8fc95ac870104c,
     type: 3}
   EnemyType: 0
-  SpawnPosition: {x: 502, y: 9.24, z: 683}
+  SpawnPosition: {x: 519.6, y: 7.96, z: 676.4}
   SpawnRotation: {x: 0, y: 0, z: 0}
-  MovementSpeed: 0
   MaxHealth: 150
-  enemyBulletView: {fileID: 5919529648297277494, guid: e43127769bc76454ea6e1d88ef1bb561,
-    type: 3}
-  attackStrength: 0
+  attackStrength: 10
+  zigzagAmplitude: 500
+  zigzagFrequency: 1
+  hoverHeight: 10
+  AttackInterval: 3

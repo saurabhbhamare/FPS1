@@ -5,24 +5,21 @@ public class PlayerController
     public PlayerView playerView;
     public PlayerModel playerModel;
     private CharacterController characterController;
-
-    // private BulletPool playerBulletPool;
-    //private PlayerBulletPool playerBulletPool;
     private PlayerService playerService;
     public UIService uiService;
     public PlayerHUDManager playerHUDManager;
     public EventService eventService;
     private BulletService bulletService;
-    public PlayerController(PlayerView playerView, CharacterController characterController, PlayerService playerService, UIService uiService, PlayerHUDManager playerHUDManager, EventService eventService, BulletService bulletService)
+    private PlayerSO playerData;
+    public PlayerController(PlayerSO playerData, PlayerView playerView, CharacterController characterController, PlayerService playerService, UIService uiService, PlayerHUDManager playerHUDManager, EventService eventService, BulletService bulletService)
     {
+        this.playerData = playerData;
         this.bulletService = bulletService;
-        //playerBulletPool = new BulletPool();
         this.playerHUDManager = playerHUDManager;
         this.playerService = playerService;
-        this.playerModel = new PlayerModel();
+        this.playerModel = new PlayerModel(playerData);
         this.playerView = playerView;
         this.characterController = characterController;
-        //this.playerBulletPool = playerBulletPool;
         this.uiService = uiService;
         this.eventService = eventService;
         RegisterEventListeners();
@@ -31,7 +28,7 @@ public class PlayerController
     public void HandleMovement()
     {
         characterController.Move(playerModel.movement * playerModel.moveSpeed * Time.deltaTime);
-        playerModel.velocity.y += playerModel.gravityVal * Time.deltaTime;
+        playerModel.velocity.y += playerModel.gravityValue * Time.deltaTime;
         characterController.Move(playerModel.velocity * Time.deltaTime);
     }
 
@@ -43,7 +40,7 @@ public class PlayerController
         playerModel.movement = playerView.transform.right * inputX + playerView.transform.forward * inputZ;
         if (Input.GetKeyDown(KeyCode.Space) && playerModel.isGrounded)
         {
-            playerModel.velocity.y = Mathf.Sqrt(playerModel.jumpForce * -2f * playerModel.gravityVal);
+            playerModel.velocity.y = Mathf.Sqrt(playerModel.jumpForce * -2f * playerModel.gravityValue);
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -78,7 +75,7 @@ public class PlayerController
     }
     private void OnPlayerContact(Collider collider)
     {
-        if (collider.gameObject.GetComponent<Bullet>())
+        if (collider.gameObject.GetComponent<Bullet>().bulletType == BulletType.ENEMY)
         {
             AudioManager.Instance.PlayPlayerHurtSound();
             int damage = collider.gameObject.GetComponent<Bullet>().GetBulletDamage();
@@ -136,5 +133,4 @@ public class PlayerController
         eventService.OnPlayerContactWithObject.RemoveListener(OnPlayerContact);
         eventService.OnPlayerDeath.RemoveListener(OnPlayerDeath);
     }
-
 }

@@ -6677,6 +6677,7 @@ MonoBehaviour:
   playerBulletsBarImage: {fileID: 1176718944}
   textMSG: {fileID: 0}
   killedEnemiesText: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 60a23a63de6a05a438024579f04bcd58, type: 2}
 --- !u!1001 &1573155264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8709,10 +8710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afd07e25bbb10941b68564ae2710b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerView: {fileID: 607107982}
-  characterController: {fileID: 607107980}
-  playerHUDManager: {fileID: 1557486157}
-  playerTransform: {fileID: 1647266459}
+  playerData: {fileID: 11400000, guid: 60a23a63de6a05a438024579f04bcd58, type: 2}
   levelEnemiesSO:
   - {fileID: 11400000, guid: 56319366c372c0e4898ec7c6a35cba87, type: 2}
   - {fileID: 11400000, guid: 64d96e5b5fea2d74799843747d6b57a4, type: 2}
@@ -8720,13 +8718,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a890534ffac3b244fa41debf3c18b503, type: 2}
   - {fileID: 11400000, guid: 6789dcc800b68b243b59ecc4c9cfaf18, type: 2}
   - {fileID: 11400000, guid: fce8aaa05c5d5a44285f4f4fd61e9efe, type: 2}
+  poolData: {fileID: 11400000, guid: 02e75a448eab60643a5fa9611cbc8c37, type: 2}
+  playerView: {fileID: 607107982}
+  characterController: {fileID: 607107980}
+  playerHUDManager: {fileID: 1557486157}
+  playerTransform: {fileID: 1647266459}
   homeButton: {fileID: 1306066833}
   gameOverScreen: {fileID: 1489016162}
   uiService: {fileID: 0}
-  playerBulletPrefab: {fileID: 8737596289814601222, guid: 51170637ebdb20e4baa205adf1535ae0,
-    type: 3}
-  enemyBulletPrefab: {fileID: 35727632701236798, guid: e43127769bc76454ea6e1d88ef1bb561,
-    type: 3}
 --- !u!4 &2095746754
 Transform:
   m_ObjectHideFlags: 0

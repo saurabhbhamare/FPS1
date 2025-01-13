@@ -8,15 +8,21 @@ public class PlayerHUDManager : MonoBehaviour
     [SerializeField] private Image playerBulletsBarImage;
     [SerializeField] private GameObject textMSG;
     [SerializeField] private TextMeshProUGUI killedEnemiesText;
+    [SerializeField] private PlayerSO playerData;
 
-    private int playerHealthAmount = 100;
-    private float ammoAmount = 10;
-    private float maxAmmo = 10;
-    private int enemiesKilledCount;
+    private int playerHealthAmount;
+    private float ammoAmount;
+    private float maxAmmo;
+    private void Awake()
+    {
+        playerHealthAmount = playerData.PlayerMaxHealth;
+        maxAmmo = playerData.MaxAmmo;
+        ammoAmount = maxAmmo;
+    }
     public void UpdateAmmoBarUIAfterFiring()
     {
         ammoAmount--;
-        playerBulletsBarImage.fillAmount = ammoAmount / 10;
+        playerBulletsBarImage.fillAmount = ammoAmount / maxAmmo;
     }
     public void ResetAmmoAmount()
     {
@@ -38,7 +44,7 @@ public class PlayerHUDManager : MonoBehaviour
     }
     public void ResetHealthValueAndHealtBar()
     {
-        playerHealthAmount = 100;
+        playerHealthAmount = playerData.PlayerMaxHealth;
         playerHealthBarImage.fillAmount = 1f;
     }
 }

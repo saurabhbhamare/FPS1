@@ -4,18 +4,19 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class MainHandler : MonoBehaviour
 {
-    
+    [Header("Character References")]
+    [SerializeField] private PlayerSO playerData;
+    [SerializeField] private List<EnemySO> levelEnemiesSO;
+    [SerializeField] private PoolSO poolData;
     [SerializeField] private PlayerView playerView;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerHUDManager playerHUDManager;
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private List<EnemySO> levelEnemiesSO;
 
+    [Header("UI References")]
     [SerializeField] private Button homeButton;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private UIService uiService;
-    [SerializeField] private GameObject playerBulletPrefab;
-    [SerializeField] private GameObject enemyBulletPrefab;
 
     private PlayerController playerController;
     private PlayerService playerService;
@@ -34,11 +35,10 @@ public class MainHandler : MonoBehaviour
     }
     private void InitServices()
     {
-        bulletService = new BulletService(playerBulletPrefab,enemyBulletPrefab,playerTransform);
+        bulletService = new BulletService(poolData, playerTransform);
         eventService = new EventService();
-        playerService = new PlayerService(playerView, characterController, uiService, playerHUDManager, eventService,bulletService);
-        enemyService = new EnemyService(levelEnemiesSO, playerTransform,bulletService);
-      
+        playerService = new PlayerService(playerData,playerView, characterController, uiService, playerHUDManager, eventService,bulletService);
+        enemyService = new EnemyService(levelEnemiesSO, playerTransform,bulletService);  
     }
     private void ShowGameOverScreen()
     {

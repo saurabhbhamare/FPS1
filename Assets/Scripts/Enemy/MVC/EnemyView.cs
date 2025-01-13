@@ -26,7 +26,7 @@ public class EnemyView : MonoBehaviour
             {
                 return;
             }
-            enemyController.GetEnemeyModel().nextAttackTime = Time.time + enemyController.GetEnemeyModel().attackInterval;
+            enemyController.GetEnemyModel().nextAttackTime = Time.time + enemyController.GetEnemyModel().attackInterval;
         }
     }
     void Update()
@@ -36,7 +36,6 @@ public class EnemyView : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collision for enemy happened");
         this.enemyController.HandleCollision(other);
     }
     public Image GetHealthBarUIImage()
@@ -49,10 +48,10 @@ public class EnemyView : MonoBehaviour
     }
     public void HandleShooting()
     {
-        if(Time.time >= enemyController.GetEnemeyModel().nextAttackTime)
+        if(Time.time >= enemyController.GetEnemyModel().nextAttackTime)
         {
             this.enemyController.Attack();
-            enemyController.GetEnemeyModel().nextAttackTime = Time.time + enemyController.GetEnemeyModel().attackInterval;
+            enemyController.GetEnemyModel().nextAttackTime = Time.time + enemyController.GetEnemyModel().attackInterval;
         }
     }
 }

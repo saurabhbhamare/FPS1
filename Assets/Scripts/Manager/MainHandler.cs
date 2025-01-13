@@ -6,7 +6,6 @@ public class MainHandler : MonoBehaviour
 {
     
     [SerializeField] private PlayerView playerView;
-   // [SerializeField] private PlayerBulletView playerBulletView;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerHUDManager playerHUDManager;
     [SerializeField] private Transform playerTransform;
@@ -16,6 +15,7 @@ public class MainHandler : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private UIService uiService;
     [SerializeField] private GameObject playerBulletPrefab;
+    [SerializeField] private GameObject enemyBulletPrefab;
 
     private PlayerController playerController;
     private PlayerService playerService;
@@ -34,7 +34,7 @@ public class MainHandler : MonoBehaviour
     }
     private void InitServices()
     {
-        bulletService = new BulletService(playerBulletPrefab);
+        bulletService = new BulletService(playerBulletPrefab,enemyBulletPrefab,playerTransform);
         eventService = new EventService();
         playerService = new PlayerService(playerView, characterController, uiService, playerHUDManager, eventService,bulletService);
         enemyService = new EnemyService(levelEnemiesSO, playerTransform,bulletService);

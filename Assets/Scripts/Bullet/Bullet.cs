@@ -1,25 +1,19 @@
 using UnityEngine;
 
-public class BulletView : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-     private float bulletSpeed = 100f;
-    //[SerializeField] private float bulletSpeed = 100f;
+    private float bulletSpeed = 100f;
+    private int bulletDamage = 10;
     public BulletType bulletType;
     private BulletService bulletService;
-
-    // Set BulletService reference
     public void SetBulletService(BulletService service)
     {
         bulletService = service;
     }
-
     void Update()
     {
+        //Handle Movement
         transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
-        //if (Vector3.Distance(transform.position, Vector3.zero) > 100f) // Example distance check
-        //{
-        //    bulletService.ReturnBullet(this);
-        //}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,5 +24,9 @@ public class BulletView : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         bulletService.ReturnBullet(this);
+    }
+    public int GetBulletDamage()
+    {
+        return bulletDamage;
     }
 }

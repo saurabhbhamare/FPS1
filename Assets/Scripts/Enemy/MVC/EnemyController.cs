@@ -34,10 +34,9 @@ public class EnemyController
     }
     public void HandleCollision(Collider collider)
     {
-        if (collider.GetComponent<BulletView>())
+        if (collider.GetComponent<Bullet>())
         {
-            //int damage = collider.GetComponent<bull>().playerBulletController.GetPlayerBulletModel().bulletDamage;
-            int damage = 20;
+            int damage = collider.GetComponent<Bullet>().GetBulletDamage();
             TakeDamage(damage);
             UpdateHealthBarUI();
             CheckIfDead();
@@ -56,5 +55,4 @@ public class EnemyController
     }
     public virtual void Movement() { }
     public virtual void Attack() { }
-    //public virtual void ReturnBulletToPool(EnemyBulletController bulletToReturn) { }
 }

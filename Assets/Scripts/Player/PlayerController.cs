@@ -13,7 +13,7 @@ public class PlayerController
     public PlayerHUDManager playerHUDManager;
     public EventService eventService;
     private BulletService bulletService;
-    public PlayerController(PlayerView playerView, CharacterController characterController,PlayerService playerService, UIService uiService, PlayerHUDManager playerHUDManager, EventService eventService,BulletService bulletService)
+    public PlayerController(PlayerView playerView, CharacterController characterController, PlayerService playerService, UIService uiService, PlayerHUDManager playerHUDManager, EventService eventService, BulletService bulletService)
     {
         this.bulletService = bulletService;
         //playerBulletPool = new BulletPool();
@@ -60,18 +60,15 @@ public class PlayerController
     private void Fire()
     {
         AudioManager.Instance.PlayFireSound();
-        //PlayerBulletController playerBullet = playerBulletPool.GetPlayerBullet();
-
-        //playerBullet.ConfigureBullet(playerView.firePoint, playerService);
-        if(bulletService==null)
+        if (bulletService == null)
         {
             Debug.Log("bulletservice is null");
         }
-        bulletService.FireBullet(playerView.firePoint.position, playerView.firePoint.rotation);
+        bulletService.FireBullet(playerView.firePoint.position, playerView.firePoint.rotation, BulletType.PLAYER);
         playerModel.ammoStock--;
         if (playerModel.ammoStock < 1)
         {
-            playerView.ReloadWeapon();
+            StartReloading();
         }
         playerHUDManager.UpdateAmmoBarUIAfterFiring();
     }
@@ -79,51 +76,65 @@ public class PlayerController
     {
         playerModel.playerHealth -= damage;
     }
-    //private void OnPlayerContact(Collider collider)
-    //{
-    //    if (collider.gameObject.GetComponent<EnemyBulletView>())
-    //    {
-    //        AudioManager.Instance.PlayPlayerHurtSound();
-    //        int damage = collider.gameObject.GetComponent<EnemyBulletView>().GetEnemyBulletController().GetBulletDamage();
-    //        TakeDamage(damage);
-    //        if (playerModel.playerHealth <= 0)
-    //        {
-    //            eventService.OnPlayerDeath.Invoke();
-    //        }
-    //        playerHUDManager.UpdateHealthBarAfterTakingDamage(damage);
+    private void OnPlayerContact(Collider collider)
+    {
+        if (collider.gameObject.GetComponent<Bullet>())
+        {
+            AudioManager.Instance.PlayPlayerHurtSound();
+            int damage = collider.gameObject.GetComponent<Bullet>().GetBulletDamage();
+            TakeDamage(damage);
+            if (playerModel.playerHealth <= 0)
+            {
+                eventService.OnPlayerDeath.Invoke();
+            }
+            playerHUDManager.UpdateHealthBarAfterTakingDamage(damage);
 
-    //    }
-    //    if (collider.gameObject.GetComponent<EnemyView>())
-    //    {
-    //        AudioManager.Instance.PlayPlayerHurtSound();
-    //        int damage = collider.gameObject.GetComponent<EnemyView>().enemyController.GetAttackStrength();
-    //        TakeDamage(damage);
-    //        if (playerModel.playerHealth <= 0)
-    //        {
-    //            eventService.OnPlayerDeath.Invoke();
-    //        }
-    //        playerHUDManager.UpdateHealthBarAfterTakingDamage(damage);
-    //    }
-    //    if (collider.gameObject.GetComponent<HealthKit>())
-    //    {
-    //        playerModel.playerHealth = playerModel.playerMaxHealth;
-    //        playerHUDManager.ResetHealthValueAndHealtBar();
-    //    }
-    //}
+        }
+        if (collider.gameObject.GetComponent<EnemyView>())
+        {
+            AudioManager.Instance.PlayPlayerHurtSound();
+            int damage = collider.gameObject.GetComponent<EnemyView>().enemyController.GetAttackStrength();
+            TakeDamage(damage);
+            if (playerModel.playerHealth <= 0)
+            {
+                eventService.OnPlayerDeath.Invoke();
+            }
+            playerHUDManager.UpdateHealthBarAfterTakingDamage(damage);
+        }
+        if (collider.gameObject.GetComponent<HealthKit>())
+        {
+            playerModel.playerHealth = playerModel.playerMaxHealth;
+            playerHUDManager.ResetHealthValueAndHealtBar();
+        }
+    }
     private void OnPlayerDeath()
     {
         characterController.enabled = false;
         playerView.enabled = false;
     }
+    public void StartReloading()
+    {
+        playerModel.isReloading = true;
+        playerModel.reloadStartTime = Time.time;
+    }
+    public void CheckReloading()
+    {
+        if (playerModel.isReloading && Time.time >= playerModel.reloadStartTime + playerModel.reloadDuration)
+        {
+            playerModel.ammoStock = playerModel.maxAmmo;
+            playerModel.isReloading = false;
+            playerHUDManager.ResetAmmoBarUIAfterReloading();
+        }
+    }
     public void RegisterEventListeners()
     {
-        //eventService.OnPlayerContactWithObject.AddListener(OnPlayerContact);
+        eventService.OnPlayerContactWithObject.AddListener(OnPlayerContact);
         eventService.OnPlayerDeath.AddListener(OnPlayerDeath);
     }
     public void UnRegisterEventListeners()
     {
-        //eventService.OnPlayerContactWithObject.RemoveListener(OnPlayerContact);
+        eventService.OnPlayerContactWithObject.RemoveListener(OnPlayerContact);
         eventService.OnPlayerDeath.RemoveListener(OnPlayerDeath);
     }
-    
+
 }

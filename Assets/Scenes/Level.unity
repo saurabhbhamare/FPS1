@@ -8725,6 +8725,8 @@ MonoBehaviour:
   uiService: {fileID: 0}
   playerBulletPrefab: {fileID: 8737596289814601222, guid: 51170637ebdb20e4baa205adf1535ae0,
     type: 3}
+  enemyBulletPrefab: {fileID: 35727632701236798, guid: e43127769bc76454ea6e1d88ef1bb561,
+    type: 3}
 --- !u!4 &2095746754
 Transform:
   m_ObjectHideFlags: 0

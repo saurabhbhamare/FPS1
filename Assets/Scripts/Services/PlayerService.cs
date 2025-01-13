@@ -11,7 +11,7 @@ public class PlayerService
     private PlayerHUDManager playerHUDManager;
     private EventService eventService;
     private BulletService bulletService;
-    public PlayerService(PlayerView playerView, CharacterController characterController,UIService uiService, PlayerHUDManager playerHUDManager, EventService eventService,BulletService bulletService)
+    public PlayerService(PlayerView playerView, CharacterController characterController, UIService uiService, PlayerHUDManager playerHUDManager, EventService eventService, BulletService bulletService)
     {
         this.bulletService = bulletService;
         this.playerHUDManager = playerHUDManager;
@@ -19,7 +19,7 @@ public class PlayerService
         this.playerView = playerView;
         this.eventService = eventService;
         this.characterController = characterController;
-        playerController = new PlayerController(playerView, characterController,this, uiService, playerHUDManager, this.eventService,bulletService);
+        playerController = new PlayerController(playerView, characterController, this, uiService, playerHUDManager, this.eventService, bulletService);
         playerView.SetPlayerController(playerController);
     }
 }

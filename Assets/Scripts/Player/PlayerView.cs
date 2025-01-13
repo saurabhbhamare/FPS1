@@ -21,6 +21,7 @@ public class PlayerView : MonoBehaviour
         }
         playerController.playerModel.isGrounded = Physics.CheckSphere(groundCheck.position, playerController.playerModel.groundDistance, groundMask);
         playerController.HandleInput();
+        playerController.CheckReloading();
     }
     public void SetPlayerController(PlayerController playerController)
     {
@@ -29,18 +30,6 @@ public class PlayerView : MonoBehaviour
     private void FixedUpdate()
     {
         playerController.HandleMovement();
-    }
-    public void ReloadWeapon()
-    {
-        StartCoroutine(StartCoroutineForReloading());
-    }
-    public IEnumerator StartCoroutineForReloading()
-    {
-        playerController.playerModel.isReloading = true;
-        yield return new WaitForSeconds(3f);
-        playerController.playerModel.ammoStock = playerController.playerModel.maxAmmo;
-        playerController.playerModel.isReloading = false;
-        playerController.playerHUDManager.ResetAmmoBarUIAfterReloading();
     }
     public Rigidbody GetRigidbody()
     {

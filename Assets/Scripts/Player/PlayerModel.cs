@@ -12,7 +12,8 @@ public class PlayerModel
     public Vector3 velocity;
     public float groundDistance = 0.1f;
     public int ammoStock = 10;
-    public float reloadingTime;
     public bool isReloading;
     public int maxAmmo = 10;
+    public float reloadDuration = 3f;
+    public float reloadStartTime = 0f;
 }
